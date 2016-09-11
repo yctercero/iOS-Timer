@@ -1,2 +1,2 @@
 # iOS-Timer
-iOS timer - first iOS app created
+Playing around with some Swift - first iOS app created.
