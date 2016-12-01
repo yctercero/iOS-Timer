@@ -12,10 +12,13 @@ class ViewController: UIViewController {
     
     @IBOutlet var timerTextField: UILabel!
     
-    var timer = NSTimer()
+    var timer = Timer()
     var seconds = 0
     var minutes = 0
     
+    @IBOutlet weak var startButton: UIBarButtonItem!
+    
+    @IBOutlet weak var pauseButton: UIBarButtonItem!
     
     func result(){
         
@@ -70,19 +73,27 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func startTimer(sender: AnyObject) {
+    @IBAction func startTimer(_ sender: AnyObject) {
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("result"), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.result), userInfo: nil, repeats: true)
+        
+        startButton.isEnabled = false
+        
+        pauseButton.isEnabled = true
         
     }
     
-    @IBAction func pauseTimer(sender: AnyObject) {
+    @IBAction func pauseTimer(_ sender: AnyObject) {
         
         timer.invalidate()
         
+        startButton.isEnabled = true
+        
+        pauseButton.isEnabled = false
+        
     }
     
-    @IBAction func resetTimer(sender: AnyObject) {
+    @IBAction func resetTimer(_ sender: AnyObject) {
         
         timer.invalidate()
         
@@ -90,6 +101,10 @@ class ViewController: UIViewController {
         
         seconds = 0
         minutes = 0
+        
+        startButton.isEnabled = true
+        
+        pauseButton.isEnabled = false
         
     }
     
